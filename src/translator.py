@@ -10,6 +10,7 @@ class PigLatinTranslator:
         :raise PigLatinError: for any error situation.
         """
         self.phrase = phrase
+        self.vowels = {'a', 'e', 'i', 'o', 'u'}
 
     def get_phrase(self) -> str:
         """
@@ -23,7 +24,17 @@ class PigLatinTranslator:
         Returns the Pig Latin translation of the phrase.
         :return: the translation.
         """
+        first_letter = self.phrase[0]
+        last_letter = self.phrase[-1]
+
         if self.phrase == '':
             return 'nil'
 
-        return 'anynay'
+        if first_letter in self.vowels and last_letter == 'y':
+            return self.phrase + 'nay'
+
+        if last_letter in self.vowels:
+            return self.phrase + 'yay'
+
+        return self.phrase
+
