@@ -24,17 +24,20 @@ class PigLatinTranslator:
         Returns the Pig Latin translation of the phrase.
         :return: the translation.
         """
-        first_letter = self.phrase[0]
-        last_letter = self.phrase[-1]
-
         if self.phrase == '':
             return 'nil'
+
+        first_letter = self.phrase[0]
+        last_letter = self.phrase[-1]
 
         if first_letter in self.vowels and last_letter == 'y':
             return self.phrase + 'nay'
 
         if last_letter in self.vowels:
             return self.phrase + 'yay'
+
+        if last_letter not in self.vowels:
+            return self.phrase + 'ay'
 
         return self.phrase
 
