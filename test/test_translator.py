@@ -31,8 +31,8 @@ class TestPigLatinTranslator(TestCase):
 
     #user story #3 - third case
     def test_translate_phrase_ending_with_consonant(self):
-        translator = PigLatinTranslator('guitar')
+        translator = PigLatinTranslator('ask')
         translation = translator.translate()
-        self.assertEqual(translation, "guitaray")
+        self.assertEqual(translation, "askay")
 
 
