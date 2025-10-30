@@ -2,6 +2,9 @@ from src.error import PigLatinError
 
 
 class PigLatinTranslator:
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+    consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x',
+                  'y', 'z']
 
     def __init__(self, phrase: str):
         """
@@ -10,9 +13,6 @@ class PigLatinTranslator:
         :raise PigLatinError: for any error situation.
         """
         self.phrase = phrase
-        self.vowels = {'a', 'e', 'i', 'o', 'u'}
-        self.consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x',
-                      'y', 'z']
 
     def get_phrase(self) -> str:
         """
@@ -48,6 +48,7 @@ class PigLatinTranslator:
             return self.phrase + 'ay'
 
         return self.phrase
+
 
     def return_initial_consonants(self) -> int:
         consonants = 0
