@@ -36,8 +36,10 @@ class PigLatinTranslator:
             return self.phrase + 'nay'
 
         if first_letter in self.consonants:
-            substring = self.phrase[1:] #prendi la sottostringa dal carattere 1 in poi
-            return substring + first_letter + 'ay'
+            num_consonants = self.return_initial_consonants()
+            consonants = self.phrase[:num_consonants]
+            rest = self.phrase[num_consonants:]
+            return rest + consonants + 'ay'
 
         if last_letter in self.vowels:
             return self.phrase + 'yay'
@@ -47,5 +49,13 @@ class PigLatinTranslator:
 
         return self.phrase
 
+    def return_initial_consonants(self) -> int:
+        consonants = 0
 
+        for letter in self.phrase:
+            if letter in self.consonants:
+                consonants += 1
+            elif letter in self.vowels:
+                break
 
+        return consonants
