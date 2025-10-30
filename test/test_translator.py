@@ -38,7 +38,7 @@ class TestPigLatinTranslator(TestCase):
     #user story #4
     def test_translate_phrase_starting_with_consonant(self):
         translator = PigLatinTranslator("hello")
-        translation = translator.translate_starting_with_consonant()
+        translation = translator.translate()
         self.assertEqual(translation, "ellohay")
 
 

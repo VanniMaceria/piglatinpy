@@ -35,16 +35,17 @@ class PigLatinTranslator:
         if first_letter in self.vowels and last_letter == 'y':
             return self.phrase + 'nay'
 
+        if first_letter in self.consonants:
+            substring = self.phrase[1:] #prendi la sottostringa dal carattere 1 in poi
+            return substring + first_letter + 'ay'
+
         if last_letter in self.vowels:
             return self.phrase + 'yay'
 
         if last_letter not in self.vowels:
             return self.phrase + 'ay'
 
-    def translate_starting_with_consonant(self) -> str:
-        first_letter = self.phrase[0]
+        return self.phrase
 
-        if first_letter in self.consonants:
-            substring = self.phrase[1:]  # prendi la sottostringa dal carattere 1 in poi
-            return substring + first_letter + 'ay'
+
 
