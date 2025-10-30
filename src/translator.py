@@ -11,6 +11,8 @@ class PigLatinTranslator:
         """
         self.phrase = phrase
         self.vowels = {'a', 'e', 'i', 'o', 'u'}
+        self.consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x',
+                      'y', 'z']
 
     def get_phrase(self) -> str:
         """
@@ -39,5 +41,10 @@ class PigLatinTranslator:
         if last_letter not in self.vowels:
             return self.phrase + 'ay'
 
-        return self.phrase
+    def translate_starting_with_consonant(self) -> str:
+        first_letter = self.phrase[0]
+
+        if first_letter in self.consonants:
+            substring = self.phrase[1:]  # prendi la sottostringa dal carattere 1 in poi
+            return substring + first_letter + 'ay'
 
