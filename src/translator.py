@@ -1,62 +1,70 @@
-from src.error import PigLatinError
-
-
 class PigLatinTranslator:
     vowels = {'a', 'e', 'i', 'o', 'u'}
-    consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x',
-                  'y', 'z']
+    consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n',
+                  'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 
     def __init__(self, phrase: str):
-        """
-        Creates a pig latin translator given a phrase.
-        :param phrase: the phrase.
-        :raise PigLatinError: for any error situation.
-        """
         self.phrase = phrase
 
     def get_phrase(self) -> str:
-        """
-        Returns the phrase.
-        :return: the phrase.
-        """
         return self.phrase
 
     def translate(self) -> str:
-        """
-        Returns the Pig Latin translation of the phrase.
-        :return: the translation.
-        """
         if self.phrase == '':
             return 'nil'
 
-        first_letter = self.phrase[0]
-        last_letter = self.phrase[-1]
+        #traduzione frase parola per parola
+        if ' ' in self.phrase or '-' in self.phrase:
+            return self._translate_multi_word()
+
+        #altrimenti traduci solo la singola parola
+        return self._translate_single_word(self.phrase)
+
+    def _translate_multi_word(self) -> str:
+        result = ''
+        word = ''
+
+        for char in self.phrase:
+            if char.isalpha():  #controlla se il carattere che scorre è una lettera
+                word += char
+            else:  # char è spazio o trattino
+                if word:
+                    result += self._translate_single_word(word)
+                    word = ''
+                result += char  # manteniamo lo spazio o trattino
+
+        # ultima parola
+        if word:
+            result += self._translate_single_word(word)
+
+        return result
+
+    def _translate_single_word(self, word: str) -> str:
+        if word == '':
+            return ''
+
+        first_letter = word[0].lower()
+        last_letter = word[-1].lower()
 
         if first_letter in self.vowels and last_letter == 'y':
-            return self.phrase + 'nay'
+            return word + 'nay'
 
         if first_letter in self.consonants:
-            num_consonants = self.return_initial_consonants()
-            consonants = self.phrase[:num_consonants]
-            rest = self.phrase[num_consonants:]
+            num_consonants = self.return_initial_consonants_word(word)
+            consonants = word[:num_consonants]
+            rest = word[num_consonants:]
             return rest + consonants + 'ay'
 
         if last_letter in self.vowels:
-            return self.phrase + 'yay'
+            return word + 'yay'
 
-        if last_letter not in self.vowels:
-            return self.phrase + 'ay'
+        return word + 'ay'
 
-        return self.phrase
-
-
-    def return_initial_consonants(self) -> int:
+    def return_initial_consonants_word(self, word: str) -> int:
         consonants = 0
-
-        for letter in self.phrase:
+        for letter in word.lower():
             if letter in self.consonants:
                 consonants += 1
             elif letter in self.vowels:
                 break
-
         return consonants

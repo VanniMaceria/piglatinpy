@@ -41,22 +41,34 @@ class TestPigLatinTranslator(TestCase):
         translation = translator.translate()
         self.assertEqual(translation, "ellohay")
 
-    # user story #4 - altro test per essere sicuro
+    #user story #4 - altro test per essere sicuro
     def test_translate_phrase_starting_with_consonant_c(self):
         translator = PigLatinTranslator("come")
         translation = translator.translate()
         self.assertEqual(translation, "omecay")
 
-    # user story #5
+    #user story #5
     def test_translate_phrase_starting_with_more_than_one_consonant(self):
         translator = PigLatinTranslator("known")
         translation = translator.translate()
         self.assertEqual(translation, "ownknay")
 
-    # user story #5 - altro test
+    #user story #5 - altro test
     def test_translate_phrase_starting_with_more_than_one_consonant_2(self):
         translator = PigLatinTranslator("knebworth")
         translation = translator.translate()
         self.assertEqual(translation, "ebworthknay")
+
+    #user story #6
+    def test_translate_phrase_with_more_than_one_word(self):
+        translator = PigLatinTranslator("hello world")
+        translation = translator.translate()
+        self.assertEqual(translation, "ellohay orldway")
+
+    # user story #6 - test con '-'
+    def test_translate_phrase_with_more_than_one_word_with_dash(self):
+        translator = PigLatinTranslator("well-being")
+        translation = translator.translate()
+        self.assertEqual(translation, "ellway-eingbay")
 
 
